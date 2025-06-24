@@ -1,0 +1,2 @@
+extra-files/**/etc/ssh/* filter=git-crypt diff=git-crypt
+extra-files/*encryption* filter=git-crypt diff=git-crypt
