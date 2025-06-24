@@ -1,0 +1,3 @@
+[devshell]
+
+packages = ["just", "sops", "ssh-to-age", "nixos-rebuild", "git-crypt"]
