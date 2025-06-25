@@ -9,6 +9,7 @@
     inputs.self.homeModules.cli-git
     inputs.self.homeModules.cli-gpg
     inputs.self.homeModules.cli-lazygit
+    inputs.self.homeModules.cli-ripgrep
     inputs.self.homeModules.cli-shells
   ];
 
