@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.desktop;
 in
@@ -18,4 +23,3 @@ in
     };
   };
 }
-

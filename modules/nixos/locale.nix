@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.locale;
 in
@@ -28,19 +33,22 @@ in
   config = lib.mkIf cfg.enable {
     i18n = {
       defaultLocale = cfg.default;
-      supportedLocales = ["${cfg.default}/UTF-8" "${cfg.extra_locale}/UTF-8"];
+      supportedLocales = [
+        "${cfg.default}/UTF-8"
+        "${cfg.extra_locale}/UTF-8"
+      ];
       extraLocaleSettings = {
         # LC_ALL = cfg.default
-      LC_MESSAGES = cfg.default;
-      LC_ADDRESS = cfg.extra_locale;
-      LC_MEASUREMENT = cfg.extra_locale;
-      LC_MONETARY = cfg.extra_locale;
-      LC_NAME = cfg.extra_locale;
-      LC_NUMERIC = cfg.extra_locale;
-      LC_PAPER = cfg.extra_locale;
-      LC_TELEPHONE = cfg.extra_locale;
-      LC_TIME = cfg.extra_locale;
-      LC_COLLATE = cfg.extra_locale;
+        LC_MESSAGES = cfg.default;
+        LC_ADDRESS = cfg.extra_locale;
+        LC_MEASUREMENT = cfg.extra_locale;
+        LC_MONETARY = cfg.extra_locale;
+        LC_NAME = cfg.extra_locale;
+        LC_NUMERIC = cfg.extra_locale;
+        LC_PAPER = cfg.extra_locale;
+        LC_TELEPHONE = cfg.extra_locale;
+        LC_TIME = cfg.extra_locale;
+        LC_COLLATE = cfg.extra_locale;
       };
     };
     time = lib.mkIf (cfg.timezone != "automatic") {
@@ -55,4 +63,3 @@ in
     };
   };
 }
-

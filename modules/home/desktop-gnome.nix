@@ -1,8 +1,15 @@
-{ config,options, inputs, pkgs, lib, osConfig, ... }:
+{
+  config,
+  options,
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
 let
   cfg = config.gorschu.home.desktop.gnome;
 in
-  {
+{
   options.gorschu.home.desktop.gnome = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -11,16 +18,30 @@ in
     };
   };
 
-config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     dconf.settings = {
       "org/gnome/desktop/background" = {
-            picture-uri = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-l.jxl";
-            picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-d.jxl";
+        picture-uri = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-l.jxl";
+        picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-d.jxl";
       };
       "org/gnome/desktop/input-sources" = {
-        mru-sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "us" ]) ];
-        sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "de+nodeadkeys" ]) (lib.hm.gvariant.mkTuple [ "xkb" "us" ]) ];
-        xkb-options = ["caps:escape"];
+        mru-sources = [
+          (lib.hm.gvariant.mkTuple [
+            "xkb"
+            "us"
+          ])
+        ];
+        sources = [
+          (lib.hm.gvariant.mkTuple [
+            "xkb"
+            "de+nodeadkeys"
+          ])
+          (lib.hm.gvariant.mkTuple [
+            "xkb"
+            "us"
+          ])
+        ];
+        xkb-options = [ "caps:escape" ];
       };
       "org/gnome/desktop/interface" = {
         accent-color = "teal";
@@ -57,6 +78,11 @@ config = lib.mkIf cfg.enable {
         show-extensions-notice = false;
       };
     };
-    home.packages = with pkgs; [gnome-tweaks];
+    home.packages = with pkgs; [
+      gnome-tweaks
+    ];
+    programs.ptyxis = {
+      enable = true;
+    };
   };
 }

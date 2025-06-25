@@ -1,13 +1,15 @@
 { pkgs, inputs, ... }:
 {
-  imports = [ inputs.sops-nix.nixosModules.sops
-  inputs.self.nixosModules.ssh
-  inputs.self.nixosModules.desktop
-  inputs.self.nixosModules.desktop-kde
-  inputs.self.nixosModules.desktop-gnome
-  inputs.self.nixosModules.programs-_1password
-  inputs.self.nixosModules.locale
-  inputs.self.nixosModules.hardware-powermanagement
+  imports = [
+    inputs.catppuccin.nixosModules.catppuccin
+    inputs.sops-nix.nixosModules.sops
+    inputs.self.nixosModules.ssh
+    inputs.self.nixosModules.desktop
+    inputs.self.nixosModules.desktop-kde
+    inputs.self.nixosModules.desktop-gnome
+    inputs.self.nixosModules.programs-_1password
+    inputs.self.nixosModules.locale
+    inputs.self.nixosModules.hardware-powermanagement
   ];
 
   programs.vim.enable = true;
@@ -26,10 +28,17 @@
       experimental-features = nix-command flakes cgroups
     '';
   };
-    programs.nh = {
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 7d --keep 3";
+    flake = "/home/gorschu/nix-config";
+  };
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "rosewater";
+    tty = {
       enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 7d --keep 3";
-      flake = "/home/gorschu/nix-config";
+    };
   };
 }

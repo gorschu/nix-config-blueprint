@@ -14,9 +14,16 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
-                extraArgs = ["-n" "ESP"];
+                extraArgs = [
+                  "-n"
+                  "ESP"
+                ];
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" "nofail" "umask=0077"];
+                mountOptions = [
+                  "defaults"
+                  "nofail"
+                  "umask=0077"
+                ];
               };
             };
             zfs = {

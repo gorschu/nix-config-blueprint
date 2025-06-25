@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.hardware.bluetooth;
 in
@@ -17,10 +22,9 @@ in
       settings = {
         General = {
           Enable = "Source,Sink,Media,Socket";
-	  Experimental = true;
+          Experimental = true;
         };
       };
     };
   };
 }
-

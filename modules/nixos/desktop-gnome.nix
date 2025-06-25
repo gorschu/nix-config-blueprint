@@ -1,4 +1,10 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.gorschu.desktop.gnome;
 in
@@ -16,8 +22,8 @@ in
       displayManager.gdm = {
         enable = true;
         wayland = true;
+      };
     };
-   };
-};
+    environment.gnome.excludePackages = with pkgs; [ gnome-console ];
+  };
 }
-

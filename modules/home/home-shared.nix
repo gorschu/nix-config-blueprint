@@ -1,7 +1,18 @@
-{ inputs, pkgs, lib, osConfig, ... }:
 {
-  imports = [ inputs.nixvim.homeManagerModules.nixvim
-  ./desktop-gnome.nix];
+  inputs,
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
+{
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+    inputs.self.homeModules.cli
+    inputs.self.homeModules.desktop
+    inputs.self.homeModules.desktop-gnome # move this to desktop
+    inputs.self.homeModules.general-session
+  ];
 
   # only available on linux, disabled on macos
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
@@ -25,11 +36,9 @@
       };
     };
     plugins.lualine.enable = true;
-    };
-
-  programs.firefox = {
-    enable = true;
   };
-
-
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "rosewater";
+  };
 }

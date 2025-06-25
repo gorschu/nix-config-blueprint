@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.services.pipewire;
 in
@@ -20,4 +25,3 @@ in
     };
   };
 }
-

@@ -1,15 +1,22 @@
-{ flake, pkgs, inputs, config, ... }:
+{
+  flake,
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 {
 
   # TODO: Can we move some to host-shared?
-  imports = [ inputs.self.nixosModules.host-shared
-  inputs.self.nixosModules.services-pipewire
-  inputs.self.nixosModules.networking
-  inputs.self.nixosModules.hardware-bluetooth
-  inputs.self.nixosModules.zfs
-  inputs.disko.nixosModules.disko
-  inputs.nixos-facter-modules.nixosModules.facter
-  ./disko.nix
+  imports = [
+    inputs.self.nixosModules.host-shared
+    inputs.self.nixosModules.services-pipewire
+    inputs.self.nixosModules.networking
+    inputs.self.nixosModules.hardware-bluetooth
+    inputs.self.nixosModules.zfs
+    inputs.disko.nixosModules.disko
+    inputs.nixos-facter-modules.nixosModules.facter
+    ./disko.nix
   ];
 
   disko.devices.disk.main.device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLW512HMJP-000L7_S359NX0HC16935_1";
@@ -54,16 +61,16 @@
         "wheel"
         "users"
       ];
-   };
-   root = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHpVzgsHl+TsjfyfAdRKpF55Q658/M3RBj03HzMdAaa"
-    ];
-     hashedPasswordFile = config.sops.secrets."root/password".path;
-   };
+    };
+    root = {
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHpVzgsHl+TsjfyfAdRKpF55Q658/M3RBj03HzMdAaa"
+      ];
+      hashedPasswordFile = config.sops.secrets."root/password".path;
+    };
   };
   users.mutableUsers = false;
- boot.loader = {
+  boot.loader = {
     systemd-boot = {
       enable = true;
       consoleMode = "max";
@@ -100,5 +107,11 @@
     };
   };
   programs.git.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
+  };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Optionally, set the environment variable
 }
-

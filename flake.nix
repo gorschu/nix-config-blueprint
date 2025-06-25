@@ -11,14 +11,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-     plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     devshell.url = "github:numtide/devshell";
     sops-nix.url = "github:Mic92/sops-nix";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     # nixos-anywhere
     disko.url = "github:nix-community/disko";
@@ -29,6 +24,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
 
   };
 

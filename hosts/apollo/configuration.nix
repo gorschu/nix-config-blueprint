@@ -1,12 +1,19 @@
-{ flake, pkgs, inputs, config, ... }:
+{
+  flake,
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 {
 
-  imports = [ inputs.self.nixosModules.host-shared
-  inputs.self.nixosModules.services-pipewire
-  inputs.self.nixosModules.hardware-bluetooth
-  inputs.disko.nixosModules.disko
-  inputs.nixos-facter-modules.nixosModules.facter
-  ./disko.nix
+  imports = [
+    inputs.self.nixosModules.host-shared
+    inputs.self.nixosModules.services-pipewire
+    inputs.self.nixosModules.hardware-bluetooth
+    inputs.disko.nixosModules.disko
+    inputs.nixos-facter-modules.nixosModules.facter
+    ./disko.nix
   ];
 
   disko.devices.disk.main.device = "/dev/sda"; # change to /dev/disk/by-id/...
@@ -15,16 +22,13 @@
   nixpkgs.config.allowUnfree = true;
   nix.extraOptions = ''
     experimental-features = nix-command flakes cgroups
-    '';
+  '';
 
   networking = {
     hostName = "apollo";
-    hostId = builtins.substring 0 8 (
-      builtins.hashString "sha256" config.networking.hostName
-    );
+    hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
   };
   systemd.network.wait-online.enable = false;
-
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -58,16 +62,16 @@
         "wheel"
         "users"
       ];
-   };
-   root = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHpVzgsHl+TsjfyfAdRKpF55Q658/M3RBj03HzMdAaa"
-    ];
-     hashedPasswordFile = config.sops.secrets."root/password".path;
-   };
+    };
+    root = {
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHpVzgsHl+TsjfyfAdRKpF55Q658/M3RBj03HzMdAaa"
+      ];
+      hashedPasswordFile = config.sops.secrets."root/password".path;
+    };
   };
   users.mutableUsers = false;
- boot.loader = {
+  boot.loader = {
     systemd-boot = {
       enable = true;
       consoleMode = "max";
@@ -105,4 +109,3 @@
   };
   programs.git.enable = true;
 }
-

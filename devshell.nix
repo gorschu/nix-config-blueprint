@@ -1,6 +1,6 @@
 # devshell.nix
 # Using mkShell from numtide/devshell
-{ pkgs, perSystem, ... }:
+{ perSystem, ... }:
 perSystem.devshell.mkShell {
 
   imports = [
@@ -8,11 +8,11 @@ perSystem.devshell.mkShell {
     (perSystem.devshell.importTOML ./devshell.toml)
   ];
 
-#  env = [
-#    # Add bin/ to the beginning of PATH
-#    { name = "PATH"; prefix = "bin"; }
-#  ];
-#
-#  # terraform will be present in the environment menu.
-#  commands = [ { package = pkgs.terraform; } ];
+  #  env = [
+  #    # Add bin/ to the beginning of PATH
+  #    { name = "PATH"; prefix = "bin"; }
+  #  ];
+  #
+  #  # terraform will be present in the environment menu.
+  #  commands = [ { package = pkgs.terraform; } ];
 }

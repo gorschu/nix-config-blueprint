@@ -1,27 +1,96 @@
-{ inputs, ... }:
 {
-  imports = [
-    inputs.self.homeModules.home-shared
-  ];
-
-  gorschu.home.cli.git = {
-    enable = true;
-    userName = "Gordon Schulz";
-    userEmail = "gordon@gordonschulz.de";
-    signing = {
-      key = "0xDEE550054AA972F6";
+  config,
+  options,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  cfg = config.gorschu.home.cli.gpg;
+  fetchKey =
+    {
+      url,
+      sha256 ? lib.fakeSha256,
+    }:
+    builtins.fetchurl { inherit sha256 url; };
+in
+{
+  options.gorschu.home.cli.gpg = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "configure gpg for user";
+    };
+    publicKey = {
+      url = lib.mkOption {
+        type = lib.types.str;
+        description = "url to fetch public key from";
+      };
+      sha256 = lib.mkOption {
+        type = lib.types.str;
+        description = "sha256 of public key";
+      };
+      trust = lib.mkOption {
+        type = lib.types.int;
+        description = "trustlevel of key";
+        default = 5;
+      };
+    };
+    agent = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "enable gpg-agent";
+      };
+      maxCacheTtl = lib.mkOption {
+        type = lib.types.int;
+        default = 7200;
+        description = "expire cache after this time";
+      };
+      pinentry = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pinentry-gnome3;
+        description = "pinentry pkg to use";
+      };
     };
   };
-  gorschu.home.cli.gpg = {
-    enable = true;
-    publicKey = {
-      url = "https://github.com/gorschu.gpg";
-      sha256 = "sha256:06d3g0lv8czjbv1wrsib5r9zl6d3dmz8brxsyv7lc38y9w2aa6jc";
-      trust = 5;
+
+  config = lib.mkIf cfg.enable {
+    programs.gpg = {
+      enable = true;
+      settings = {
+        trust-model = "tofu+pgp";
+      };
+      publicKeys = [
+        {
+          source = fetchKey {
+            inherit (cfg.publicKey) url;
+            inherit (cfg.publicKey) sha256;
+          };
+          inherit (cfg.publicKey) trust;
+        }
+      ];
     };
+    services.gpg-agent = lib.mkIf cfg.agent.enable {
+      enable = true;
+      enableSshSupport = false;
+      defaultCacheTtl = cfg.agent.maxCacheTtl;
+      pinentry.package = cfg.agent.pinentry;
+      enableExtraSocket = true;
+    };
+    # ensure .gnupg is secure
+    systemd.user.tmpfiles.rules =
+      let
+        inherit (config.home) username;
+        inherit (config.home) homeDirectory;
+      in
+      [
+        "z ${homeDirectory}/.gnupg 0700 ${username} ${username} - -"
+      ];
   };
 }
 
+# TODO: write down the programs = let ... thing we did here so we don't forget before deleting
 #{
 #  pkgs,
 #  config,

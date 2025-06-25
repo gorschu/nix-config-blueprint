@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.desktop.kde;
 in
@@ -13,16 +18,15 @@ in
   config = lib.mkIf cfg.enable {
     services.xserver.enable = true;
     services.displayManager.sddm = {
-       enable = true;
-       wayland.enable = true;
+      enable = true;
+      wayland.enable = true;
     };
     services.desktopManager.plasma6.enable = true;
 
-#    qt = {
-#     enable = true;
-#     platformTheme = "gnome";
-#     style = "adwaita-dark";
-#   };
-};
+    #    qt = {
+    #     enable = true;
+    #     platformTheme = "gnome";
+    #     style = "adwaita-dark";
+    #   };
+  };
 }
-

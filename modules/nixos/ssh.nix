@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.services.ssh;
 in
@@ -18,7 +23,7 @@ in
   config = lib.mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      ports = [cfg.port];
+      ports = [ cfg.port ];
       settings = {
         PermitRootLogin = "without-password";
       };
@@ -30,4 +35,3 @@ in
     ];
   };
 }
-

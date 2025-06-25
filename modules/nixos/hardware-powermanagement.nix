@@ -1,4 +1,9 @@
-{ options, config, lib, ...}:
+{
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.hardware.powermanagement;
 in
@@ -22,4 +27,3 @@ in
     };
   };
 }
-

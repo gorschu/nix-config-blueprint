@@ -1,0 +1,44 @@
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.gorschu.home.general.xdg;
+in
+{
+  options.gorschu.home.general.xdg = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "enable xdg configuration";
+    };
+    autostart = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "enable xdg autostart";
+      };
+      readOnly = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "make xdg autostart readonly";
+      };
+      entries = lib.mkOption {
+        type = lib.types.listOf lib.types.path;
+        description = "list of autostart entries";
+      };
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    xdg = {
+      enable = true;
+      autostart = {
+        inherit (cfg.autostart) enable;
+        inherit (cfg.autostart) readOnly;
+        inherit (cfg.autostart) entries;
+      };
+    };
+  };
+}

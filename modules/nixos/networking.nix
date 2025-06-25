@@ -1,4 +1,10 @@
-{ flake, options, config, lib, ...}:
+{
+  flake,
+  options,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.gorschu.networking;
 in
@@ -13,11 +19,11 @@ in
       type = lib.types.str;
       description = "set hostname";
     };
-      dns = lib.mkOption {
-          type = lib.types.str;
-          default = "systemd-resolved";
-          description = "which dns backened to use";
-        };
+    dns = lib.mkOption {
+      type = lib.types.str;
+      default = "systemd-resolved";
+      description = "which dns backened to use";
+    };
     networkmanager = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -42,16 +48,14 @@ in
     sops.secrets."wifi.env" = {
       sopsFile = flake + /secrets/wifi.yaml;
     };
-  networking = {
-    hostName = cfg.hostname;
-    hostId = builtins.substring 0 8 (
-      builtins.hashString "sha256" config.networking.hostName
-    );
-    networkmanager = lib.mkIf cfg.networkmanager.enable {
-        dns = cfg.dns;
+    networking = {
+      hostName = cfg.hostname;
+      hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
+      networkmanager = lib.mkIf cfg.networkmanager.enable {
+        inherit (cfg) dns;
         wifi = {
-          backend = cfg.networkmanager.wifi.backend;
-          powersave = cfg.networkmanager.wifi.powersave;
+          inherit (cfg.networkmanager.wifi) backend;
+          inherit (cfg.networkmanager.wifi) powersave;
         };
         ensureProfiles = {
           environmentFiles = [ config.sops.secrets."wifi.env".path ];
@@ -74,12 +78,10 @@ in
           };
         };
       };
-  };
-  systemd.network.wait-online.enable = false;
-  services.resolved = {
+    };
+    systemd.network.wait-online.enable = false;
+    services.resolved = {
       enable = cfg.dns == "systemd-resolved";
     };
   };
 }
-
-
