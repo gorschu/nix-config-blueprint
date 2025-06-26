@@ -12,7 +12,6 @@ let
 in
 {
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
     inputs.self.homeModules.desktop-browser-firefox
     inputs.self.homeModules.desktop-browser-chrome
     inputs.self.homeModules.desktop-fonts

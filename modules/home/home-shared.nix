@@ -5,6 +5,7 @@
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.catppuccin.homeModules.catppuccin
     inputs.self.homeModules.cli
     inputs.self.homeModules.desktop
     inputs.self.homeModules.desktop-gnome # move this to desktop
