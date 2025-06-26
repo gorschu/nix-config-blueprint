@@ -19,19 +19,9 @@
   #   pkgs.lib.optionals (osConfig.programs.vim.enable && pkgs.stdenv.isDarwin) [ pkgs.skhd ]
   # );
 
-  home.stateVersion = "25.05"; # initial home-manager state
   gorschu.home.desktop.gnome.enable = true;
+  home.stateVersion = "25.05"; # initial home-manager state
 
-  programs.nixvim = {
-    enable = true;
-    colorschemes.catppuccin = {
-      enable = true;
-      settings = {
-        flavour = "macchiato";
-      };
-    };
-    plugins.lualine.enable = true;
-  };
   catppuccin = {
     flavor = "macchiato";
     accent = "rosewater";
