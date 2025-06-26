@@ -41,4 +41,5 @@
       enable = true;
     };
   };
+  home-manager.backupFileExtension = "backup";
 }
