@@ -6,6 +6,7 @@
   imports = [
     inputs.self.homeModules.cli-atuin
     inputs.self.homeModules.cli-bat
+    inputs.self.homeModules.cli-eza
     inputs.self.homeModules.cli-fzf
     inputs.self.homeModules.cli-git
     inputs.self.homeModules.cli-gpg
