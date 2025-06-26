@@ -19,11 +19,5 @@
   #   pkgs.lib.optionals (osConfig.programs.vim.enable && pkgs.stdenv.isDarwin) [ pkgs.skhd ]
   # );
 
-  gorschu.home.desktop.gnome.enable = true;
   home.stateVersion = "25.05"; # initial home-manager state
-
-  catppuccin = {
-    flavor = "macchiato";
-    accent = "rosewater";
-  };
 }

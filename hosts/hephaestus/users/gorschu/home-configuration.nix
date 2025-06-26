@@ -20,6 +20,13 @@
       trust = 5;
     };
   };
+
+  gorschu.home.desktop.gnome.enable = true;
+
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "rosewater";
+  };
 }
 
 #{
