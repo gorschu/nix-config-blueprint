@@ -37,10 +37,10 @@ in
       # };
     };
     xdg.mimeApps.defaultApplications = lib.mkIf cfg.defaultBrowser {
-      "text/html" = [ "chromium.desktop" ];
-      "text/xml" = [ "chromium.desktop" ];
-      "x-scheme-handler/http" = [ "chromium.desktop" ];
-      "x-scheme-handler/https" = [ "chromium.desktop" ];
+      "text/html" = [ "google-chrome.desktop" ];
+      "text/xml" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/http" = [ "google-chrome.desktop" ];
+      "x-scheme-handler/https" = [ "google-chrome.desktop" ];
     };
 
   };
