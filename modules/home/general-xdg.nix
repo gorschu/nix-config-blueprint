@@ -29,6 +29,13 @@ in
         description = "list of autostart entries";
       };
     };
+    mimeApps = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "enable xdg mimeapps management";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -38,6 +45,12 @@ in
         inherit (cfg.autostart) enable;
         inherit (cfg.autostart) readOnly;
         inherit (cfg.autostart) entries;
+      };
+      mime = {
+        enable = true;
+      };
+      mimeApps = {
+        inherit (cfg.mimeApps) enable;
       };
     };
   };
