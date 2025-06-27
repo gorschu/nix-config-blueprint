@@ -11,6 +11,7 @@
   imports = [
     inputs.self.nixosModules.host-shared
     inputs.self.nixosModules.networking
+    inputs.self.nixosModules.services-virtualisation
     inputs.self.nixosModules.zfs
     inputs.disko.nixosModules.disko
     inputs.nixos-facter-modules.nixosModules.facter
@@ -85,18 +86,6 @@
     gnome.enable = true;
   };
 
-  virtualisation.containers.enable = true;
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
   programs.git.enable = true;
   hardware.graphics = {
     enable = true;
@@ -105,4 +94,5 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   }; # Optionally, set the environment variable
+  gorschu.services.virtualisation.enable = true;
 }
