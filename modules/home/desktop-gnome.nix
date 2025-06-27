@@ -4,12 +4,14 @@
   pkgs,
   lib,
   osConfig,
+  inputs,
   ...
 }:
 let
   cfg = config.gorschu.home.desktop.gnome;
 in
 {
+  imports = [inputs.self.homeModules.desktop-terminal-ptyxis];
   options.gorschu.home.desktop.gnome = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -19,6 +21,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    gorschu.home.desktop.terminal.ptyxis.enable = true;
+
     home.packages = with pkgs; [
       gnome-tweaks
       gnomeExtensions.pano
@@ -102,12 +106,6 @@ in
       "org/gnome/tweaks" = {
         show-extensions-notice = false;
       };
-    };
-    home.packages = with pkgs; [
-      gnome-tweaks
-    ];
-    programs.ptyxis = {
-      enable = true;
       "org/gnome/shell/extensions/dash-to-dock" = {
         apply-custom-theme = true;
         background-opacity = 0.8;
