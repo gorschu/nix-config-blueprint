@@ -25,5 +25,6 @@ in
       };
     };
     environment.gnome.excludePackages = with pkgs; [ gnome-console ];
+    services.udev.packages = [ pkgs.gnome-settings-daemon ];
   };
 }
