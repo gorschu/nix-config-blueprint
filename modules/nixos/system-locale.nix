@@ -5,13 +5,13 @@
   ...
 }:
 let
-  cfg = config.gorschu.locale;
+  cfg = config.gorschu.system.locale;
 in
 {
-  options.gorschu.locale = {
+  options.gorschu.system.locale = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = true;
       description = "Enable and configure locales";
     };
     default = lib.mkOption {

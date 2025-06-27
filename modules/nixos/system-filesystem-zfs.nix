@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.gorschu.zfs;
+  cfg = config.gorschu.system.filesystem.zfs;
 in
 {
-  options.gorschu.zfs = {
+  options.gorschu.system.filesystem.zfs = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

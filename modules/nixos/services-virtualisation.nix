@@ -2,7 +2,6 @@
   options,
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -22,8 +21,8 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-  virtualisation.containers.enable = true;
-  virtualisation.podman = lib.mkIf cfg.enablePodman {
+    virtualisation.containers.enable = true;
+    virtualisation.podman = lib.mkIf cfg.enablePodman {
       enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement

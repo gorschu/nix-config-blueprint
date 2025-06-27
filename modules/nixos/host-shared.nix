@@ -1,18 +1,16 @@
 { pkgs, inputs, ... }:
 {
   imports = [
+    inputs.self.nixosModules.desktop
+    inputs.self.nixosModules.hardware-powermanagement
+    inputs.self.nixosModules.services-ssh
+    inputs.self.nixosModules.services-virtualisation
+    inputs.self.nixosModules.system-locale
     inputs.catppuccin.nixosModules.catppuccin
     inputs.sops-nix.nixosModules.sops
-    inputs.self.nixosModules.ssh
-    inputs.self.nixosModules.desktop
-    inputs.self.nixosModules.locale
-    inputs.self.nixosModules.hardware-powermanagement
   ];
 
   programs.vim.enable = true;
-  gorschu.locale = {
-    enable = true;
-  };
 
   # you can check if host is darwin by using pkgs.stdenv.isDarwin
   environment.systemPackages = [

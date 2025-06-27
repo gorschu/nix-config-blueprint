@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.gorschu.networking;
+  cfg = config.gorschu.system.networking;
 in
 {
-  options.gorschu.networking = {
+  options.gorschu.system.networking = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

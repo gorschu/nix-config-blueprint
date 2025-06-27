@@ -9,10 +9,9 @@
 
   # TODO: Can we move some to host-shared?
   imports = [
-    inputs.self.nixosModules.host-shared
-    inputs.self.nixosModules.networking
-    inputs.self.nixosModules.services-virtualisation
-    inputs.self.nixosModules.zfs
+    inputs.self.nixosModules.host-shared # defines most configuration shared between hosts
+    inputs.self.nixosModules.system-filesystem-zfs
+    inputs.self.nixosModules.system-networking
     inputs.disko.nixosModules.disko
     inputs.nixos-facter-modules.nixosModules.facter
     ./disko.nix
@@ -23,7 +22,7 @@
   facter.reportPath = ./facter.json;
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  gorschu.networking = {
+  gorschu.system.networking = {
     enable = true;
     hostname = "hephaestus";
   };
@@ -79,7 +78,7 @@
   #  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_15;
 
-  gorschu.zfs.enable = true;
+  gorschu.system.filesystem.zfs.enable = true;
   gorschu.services.ssh.enable = true;
   gorschu.desktop = {
     enable = true;
@@ -94,5 +93,6 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   }; # Optionally, set the environment variable
+
   gorschu.services.virtualisation.enable = true;
 }
