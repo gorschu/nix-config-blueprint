@@ -11,7 +11,7 @@ let
   cfg = config.gorschu.home.desktop.gnome;
 in
 {
-  imports = [inputs.self.homeModules.desktop-terminal-ptyxis];
+  imports = [ inputs.self.homeModules.desktop-terminal-ptyxis ];
   options.gorschu.home.desktop.gnome = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -99,6 +99,9 @@ in
       "org/gnome/desktop/wm/preferences" = {
         action-middle-click-titlebar = "lower";
         resize-with-right-button = true;
+      };
+      "org/gnome/desktop/calendar" = {
+        show-weekdate = true;
       };
       "org/gnome/system/location" = {
         enabled = true;
