@@ -19,7 +19,32 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      gnome-tweaks
+      gnomeExtensions.pano
+      gnomeExtensions.caffeine
+      gnomeExtensions.tailscale-qs
+      gnomeExtensions.gsconnect
+      gnomeExtensions.appindicator
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.impatience
+    ];
+
     dconf.settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          pano.extensionUuid
+          caffeine.extensionUuid
+          tailscale-qs.extensionUuid
+          gsconnect.extensionUuid
+          appindicator.extensionUuid
+          dash-to-dock.extensionUuid
+          impatience.extensionUuid
+        ];
+        favorite-apps = [ "firefox.desktop" ];
+      };
+
       "org/gnome/desktop/background" = {
         picture-uri = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-l.jxl";
         picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/symbolic-soup-d.jxl";
@@ -83,6 +108,23 @@ in
     ];
     programs.ptyxis = {
       enable = true;
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        apply-custom-theme = true;
+        background-opacity = 0.8;
+        dash-max-icon-size = 48;
+        dock-position = "BOTTOM";
+        height-fraction = 0.9;
+        hot-keys = true;
+        preferred-monitor = -2;
+        preferred-monitor-by-connector = "DP-1";
+        show-apps-always-in-the-edge = true;
+        show-show-apps-button = false;
+      };
+      "org/gnome/shell/extensions/pano" = {
+        history-length = 30;
+        play-audio-on-copy = false;
+        send-notification-on-copy = false;
+      };
     };
   };
 }
