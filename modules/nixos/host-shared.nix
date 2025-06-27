@@ -5,9 +5,6 @@
     inputs.sops-nix.nixosModules.sops
     inputs.self.nixosModules.ssh
     inputs.self.nixosModules.desktop
-    inputs.self.nixosModules.desktop-kde
-    inputs.self.nixosModules.desktop-gnome
-    inputs.self.nixosModules.programs-_1password
     inputs.self.nixosModules.locale
     inputs.self.nixosModules.hardware-powermanagement
   ];

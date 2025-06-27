@@ -10,9 +10,7 @@
   # TODO: Can we move some to host-shared?
   imports = [
     inputs.self.nixosModules.host-shared
-    inputs.self.nixosModules.services-pipewire
     inputs.self.nixosModules.networking
-    inputs.self.nixosModules.hardware-bluetooth
     inputs.self.nixosModules.zfs
     inputs.disko.nixosModules.disko
     inputs.nixos-facter-modules.nixosModules.facter
@@ -79,7 +77,6 @@
   };
   #  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_15;
-  services.power-profiles-daemon.enable = true;
 
   gorschu.zfs.enable = true;
   gorschu.services.ssh.enable = true;
@@ -87,12 +84,6 @@
     enable = true;
     gnome.enable = true;
   };
-  gorschu.programs._1password = {
-    enable = true;
-    gui.enable = true;
-  };
-  gorschu.services.pipewire.enable = true;
-  gorschu.hardware.bluetooth.enable = true;
 
   virtualisation.containers.enable = true;
   virtualisation = {

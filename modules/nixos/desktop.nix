@@ -1,4 +1,5 @@
 {
+  inputs,
   options,
   config,
   lib,
@@ -8,6 +9,13 @@ let
   cfg = config.gorschu.desktop;
 in
 {
+  imports = [
+    inputs.self.nixosModules.desktop-gnome
+    inputs.self.nixosModules.services-pipewire
+    inputs.self.nixosModules.hardware-bluetooth
+    inputs.self.nixosModules.hardware-logitech
+    inputs.self.nixosModules.desktop-programs-_1password
+  ];
   options.gorschu.desktop = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -17,9 +25,16 @@ in
   };
   config = lib.mkIf cfg.enable {
     # enable solaar for Logitech devices
-    hardware.logitech.wireless = {
+    gorschu.hardware.logitech = {
       enable = true;
       enableGraphical = true;
     };
+    gorschu.programs._1password = {
+      enable = true;
+      gui.enable = true;
+    };
+    gorschu.services.pipewire.enable = true;
+    gorschu.hardware.bluetooth.enable = true;
+    services.power-profiles-daemon.enable = true;
   };
 }
