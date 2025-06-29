@@ -31,7 +31,10 @@ in
     gorschu.home.desktop.browser.chrome.enable = true;
     gorschu.home.general.xdg.autostart.entries = [ "${pkgs.solaar}/share/applications/solaar.desktop" ];
 
-    home.packages = [ perSystem.self.vuescan ];
+    home.packages = [
+      perSystem.self.vuescan
+      pkgs.wl-clipboard
+    ];
 
     gtk.enable = true;
   };
