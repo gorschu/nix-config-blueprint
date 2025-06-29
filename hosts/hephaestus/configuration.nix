@@ -6,12 +6,11 @@
   ...
 }:
 {
-
-  # TODO: Can we move some to host-shared?
   imports = [
     inputs.self.nixosModules.host-shared # defines most configuration shared between hosts
     inputs.self.nixosModules.system-filesystem-zfs
     inputs.self.nixosModules.system-networking
+
     inputs.disko.nixosModules.disko
     inputs.nixos-facter-modules.nixosModules.facter
     ./disko.nix
@@ -26,10 +25,6 @@
     enable = true;
     hostname = "hephaestus";
   };
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = "25.05";
 
   # flake references our flake root
   sops.secrets."root/password" = {
@@ -78,12 +73,13 @@
   #  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_15;
 
-  gorschu.system.filesystem.zfs.enable = true;
-  gorschu.services.ssh.enable = true;
   gorschu.desktop = {
     enable = true;
     gnome.enable = true;
   };
+  gorschu.system.filesystem.zfs.enable = true;
+  gorschu.services.ssh.enable = true;
+  gorschu.services.virtualisation.enable = true;
 
   hardware.graphics = {
     enable = true;
@@ -93,5 +89,8 @@
     LIBVA_DRIVER_NAME = "iHD";
   }; # Optionally, set the environment variable
 
-  gorschu.services.virtualisation.enable = true;
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = "25.05";
+
 }
