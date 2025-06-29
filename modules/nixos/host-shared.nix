@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 {
   imports = [
+    inputs.self.nixosModules.cli
     inputs.self.nixosModules.desktop
     inputs.self.nixosModules.hardware-powermanagement
     inputs.self.nixosModules.services-ssh
