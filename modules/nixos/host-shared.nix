@@ -34,6 +34,12 @@
       clean.extraArgs = "--keep-since 7d --keep 3";
       flake = "/home/gorschu/nix-config";
     };
+    git = {
+      enable = true;
+      lfs = {
+        enable = true;
+      };
+    };
   };
   catppuccin = {
     flavor = "macchiato";
