@@ -52,6 +52,29 @@ in
       mimeApps = {
         inherit (cfg.mimeApps) enable;
       };
+      portal = {
+        enable = true;
+        config = {
+          common = {
+            default = [
+              "gtk"
+            ];
+          };
+          gnome = {
+            default = [
+              "gnome"
+              "gtk"
+            ];
+          };
+          hyprland = {
+            default = [
+              "hyprland"
+              "gtk"
+            ];
+          };
+        };
+        xdgOpenUsePortal = true;
+      };
     };
   };
 }

@@ -36,5 +36,11 @@ in
     gorschu.services.pipewire.enable = true;
     gorschu.hardware.bluetooth.enable = true;
     services.power-profiles-daemon.enable = true;
+
+    # see https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.portal.enable
+    environment.pathsToLink = [
+      "/share/xdg-desktop-portal"
+      "/share/applications"
+    ];
   };
 }

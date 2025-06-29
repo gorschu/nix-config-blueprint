@@ -34,6 +34,11 @@ in
       gnomeExtensions.impatience
     ];
 
+    xdg.portal.extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+
     dconf.settings = {
       "org/gnome/shell" = {
         disable-user-extensions = false;
