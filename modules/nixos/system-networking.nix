@@ -33,7 +33,7 @@ in
       wifi = {
         backend = lib.mkOption {
           type = lib.types.str;
-          default = "iwd";
+          default = "wpa_supplicant";
           description = "which wifi backened to use";
         };
         powersave = lib.mkOption {
