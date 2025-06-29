@@ -27,11 +27,13 @@
       use-xdg-base-directories = true;
     };
   };
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 7d --keep 3";
-    flake = "/home/gorschu/nix-config";
+  programs = {
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 7d --keep 3";
+      flake = "/home/gorschu/nix-config";
+    };
   };
   catppuccin = {
     flavor = "macchiato";
