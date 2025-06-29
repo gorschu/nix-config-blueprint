@@ -23,6 +23,9 @@
     extraOptions = ''
       experimental-features = nix-command flakes cgroups
     '';
+    settings = {
+      use-xdg-base-directories = true;
+    };
   };
   programs.nh = {
     enable = true;
@@ -37,5 +40,6 @@
       enable = true;
     };
   };
+  home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
 }
