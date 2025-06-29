@@ -14,6 +14,7 @@
     inputs.self.homeModules.cli-neovim
     inputs.self.homeModules.cli-ripgrep
     inputs.self.homeModules.cli-shells
+    inputs.self.homeModules.cli-tmux
   ];
 
 }
