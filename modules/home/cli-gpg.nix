@@ -18,7 +18,7 @@ in
   options.gorschu.home.cli.gpg = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = "configure gpg for user";
     };
     publicKey = {

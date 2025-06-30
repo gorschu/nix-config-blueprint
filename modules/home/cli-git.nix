@@ -12,7 +12,7 @@ in
   options.gorschu.home.cli.git = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = "configure git for user";
     };
     userName = lib.mkOption {
