@@ -24,7 +24,10 @@ in
         wayland = true;
       };
     };
-    environment.gnome.excludePackages = with pkgs; [ gnome-console ];
+    environment.gnome.excludePackages = with pkgs; [
+      gnome-console
+      evince
+    ];
     services.udev.packages = [ pkgs.gnome-settings-daemon ];
   };
 }

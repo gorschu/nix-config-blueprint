@@ -25,6 +25,7 @@ in
 
     home.packages = with pkgs; [
       gnome-tweaks
+      papers
       gnomeExtensions.pano
       gnomeExtensions.caffeine
       gnomeExtensions.tailscale-qs
