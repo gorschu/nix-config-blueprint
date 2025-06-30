@@ -25,6 +25,7 @@
     '';
     settings = {
       use-xdg-base-directories = true;
+      auto-optimise-store = true;
     };
   };
   programs = {
