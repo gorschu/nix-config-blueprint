@@ -63,15 +63,6 @@
     };
   };
   users.mutableUsers = false;
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      consoleMode = "max";
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  #  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
 
   gorschu.desktop = {
     enable = true;

@@ -1,6 +1,5 @@
 {
   flake,
-  pkgs,
   inputs,
   config,
   ...
@@ -71,15 +70,7 @@
     };
   };
   users.mutableUsers = false;
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      consoleMode = "max";
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  #  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+
   services.power-profiles-daemon.enable = true;
   services.automatic-timezoned.enable = true;
 
@@ -94,6 +85,7 @@
   };
   gorschu.services.pipewire.enable = true;
   gorschu.hardware.bluetooth.enable = true;
+  gorschu.system.boot.systemd-boot.enable = true;
 
   virtualisation.containers.enable = true;
   virtualisation = {

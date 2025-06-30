@@ -6,6 +6,7 @@
     inputs.self.nixosModules.hardware-powermanagement
     inputs.self.nixosModules.services-ssh
     inputs.self.nixosModules.services-virtualisation
+    inputs.self.nixosModules.system-boot
     inputs.self.nixosModules.system-locale
     inputs.catppuccin.nixosModules.catppuccin
     inputs.sops-nix.nixosModules.sops
