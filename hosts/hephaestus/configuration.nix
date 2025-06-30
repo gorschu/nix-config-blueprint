@@ -78,6 +78,7 @@
     gnome.enable = true;
   };
   gorschu.system.filesystem.zfs.enable = true;
+  gorschu.services.cups.enable = true;
   gorschu.services.ssh.enable = true;
   gorschu.services.virtualisation.enable = true;
 

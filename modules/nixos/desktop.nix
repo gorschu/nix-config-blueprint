@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.self.nixosModules.desktop-gnome
+    inputs.self.nixosModules.services-cups
     inputs.self.nixosModules.services-pipewire
     inputs.self.nixosModules.hardware-bluetooth
     inputs.self.nixosModules.hardware-logitech
