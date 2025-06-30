@@ -12,8 +12,8 @@
     inputs.self.nixosModules.system-networking
 
     inputs.disko.nixosModules.disko
-    inputs.nixos-facter-modules.nixosModules.facter
     ./disko.nix
+    inputs.nixos-facter-modules.nixosModules.facter
   ];
 
   disko.devices.disk.main.device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLW512HMJP-000L7_S359NX0HC16935_1";
