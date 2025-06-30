@@ -75,6 +75,15 @@
             type = "zfs_fs";
             mountpoint = "/persist";
           };
+          "local/tmp" = {
+            type = "zfs_fs";
+            mountpoint = "/tmp";
+            options = {
+              quota = "32G";
+              sync = "disabled";
+              redundant_metadata = "none";
+            };
+          };
 
           # README MORE: https://wiki.archlinux.org/title/ZFS#Swap_volume
           # "root/swap" = {
