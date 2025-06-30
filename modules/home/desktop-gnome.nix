@@ -35,10 +35,17 @@ in
       gnomeExtensions.impatience
     ];
 
-    xdg.portal.extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
-    ];
+    xdg = {
+      portal.extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ];
+
+      mimeApps.associations.added = {
+        "x-scheme-handler/sms" = [ "org.gnome.Shell.Extensions.GSConnect.desktop" ];
+        "x-scheme-handler/tel" = [ "org.gnome.Shell.Extensions.GSConnect.desktop" ];
+      };
+    };
 
     dconf.settings = {
       "org/gnome/shell" = {
