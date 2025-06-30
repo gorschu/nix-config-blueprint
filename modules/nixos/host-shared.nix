@@ -24,6 +24,8 @@
       experimental-features = nix-command flakes cgroups
     '';
     settings = {
+      extra-substituters = [ "https://cache.garnix.io" ];
+      trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
       use-xdg-base-directories = true;
       auto-optimise-store = true;
     };
