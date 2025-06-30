@@ -75,6 +75,8 @@ in
         };
         xdgOpenUsePortal = true;
       };
+      # mimeapps.list gets frequently clobbered, force overwrite
+      configFile."mimeapps.list".force = true;
     };
   };
 }
