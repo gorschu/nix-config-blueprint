@@ -1,0 +1,22 @@
+name: update-flake-lock
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: '0 6 * * *' # daily at 6 am
+
+jobs:
+  update-flake-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Determinate Nix
+        uses: DeterminateSystems/nix-installer-action@v17
+      - name: Update flake lock
+        id: run-update-flake-lock
+        uses: DeterminateSystems/update-flake-lock@v25
+      - name: Merge flake PR
+        run: gh pr merge --auto "${{ steps.update.outputs.pull-request-number }}" --rebase
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        if: ${{ steps.update.outputs.pull-request-number != '' }}
+
