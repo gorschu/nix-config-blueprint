@@ -17,7 +17,8 @@
   # you can check if host is darwin by using pkgs.stdenv.isDarwin
   environment.systemPackages = [
     pkgs.btop
-  ] ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.xbar ]);
+  ]
+  ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.xbar ]);
 
   nixpkgs.config.allowUnfree = true;
   nix = {

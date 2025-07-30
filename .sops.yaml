@@ -6,16 +6,16 @@ creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *admin_gorschu 
-          - *hosts_apollo 
-          - *hosts_hephaestus 
+          - *admin_gorschu
+          - *hosts_apollo
+          - *hosts_hephaestus
   - path_regex: secrets/hosts/apollo/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *admin_gorschu 
-          - *hosts_apollo 
+          - *admin_gorschu
+          - *hosts_apollo
   - path_regex: secrets/hosts/hephaestus/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *admin_gorschu 
-          - *hosts_hephaestus 
+          - *admin_gorschu
+          - *hosts_hephaestus
