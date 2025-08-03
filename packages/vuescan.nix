@@ -32,7 +32,7 @@ pkgs.stdenv.mkDerivation rec {
 
   src = pkgs.fetchurl {
     url = "https://www.hamrick.com/files/vuex6498.tgz";
-    hash = "sha256-JA2HzMIPT8x0uNPQWv7pHNnY5cYdL7ppmc2YyQW9lm8=";
+    hash = "sha256-ryO54vyVjhq66No+Ktj7PRm38knudZ6x0JlLmRcFhbI=";
   };
 
   # Stripping breaks the program
