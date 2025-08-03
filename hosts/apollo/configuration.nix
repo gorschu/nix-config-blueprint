@@ -7,31 +7,24 @@
 {
 
   imports = [
-    inputs.self.nixosModules.host-shared
-    inputs.self.nixosModules.services-pipewire
-    inputs.self.nixosModules.hardware-bluetooth
+    inputs.self.nixosModules.host-shared # defines most configuration shared between hosts
+    inputs.self.nixosModules.system-filesystem-zfs
+    inputs.self.nixosModules.system-networking
+
     inputs.disko.nixosModules.disko
-    inputs.nixos-facter-modules.nixosModules.facter
     ./disko.nix
+    inputs.nixos-facter-modules.nixosModules.facter
   ];
 
   disko.devices.disk.main.device = "/dev/sda"; # change to /dev/disk/by-id/...
+
   facter.reportPath = ./facter.json;
   nixpkgs.hostPlatform = "x86_64-linux";
-  nixpkgs.config.allowUnfree = true;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes cgroups
-  '';
 
-  networking = {
-    hostName = "apollo";
-    hostId = builtins.substring 0 8 (builtins.hashString "sha256" config.networking.hostName);
+  gorschu.system.networking = {
+    enable = true;
+    hostname = "apollo";
   };
-  systemd.network.wait-online.enable = false;
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = "25.05";
 
   # flake references our flake root
   sops.secrets."root/password" = {
@@ -71,33 +64,22 @@
   };
   users.mutableUsers = false;
 
-  services.power-profiles-daemon.enable = true;
-  services.automatic-timezoned.enable = true;
-
-  gorschu.services.ssh.enable = true;
   gorschu.desktop = {
     enable = true;
     gnome.enable = true;
   };
-  gorschu.programs._1password = {
+
+  gorschu.system.filesystem.zfs.enable = true;
+  gorschu.services.comin.enable = true;
+  gorschu.services.cups.enable = true;
+  gorschu.services.ssh.enable = true;
+  gorschu.services.virtualisation.enable = true;
+
+  hardware.graphics = {
     enable = true;
-    gui.enable = true;
   };
-  gorschu.services.pipewire.enable = true;
-  gorschu.hardware.bluetooth.enable = true;
-  gorschu.system.boot.systemd-boot.enable = true;
 
-  virtualisation.containers.enable = true;
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
-  programs.git.enable = true;
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = "25.05";
 }
