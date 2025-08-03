@@ -26,9 +26,11 @@ in
       };
       plugins = {
         lualine.enable = true;
+        neo-tree.enable = true;
         telescope = {
           enable = true;
           extensions = {
+            fzf-native.enable = true;
             project.enable = true;
             undo.enable = true;
           };
