@@ -4,6 +4,7 @@
     inputs.self.nixosModules.cli
     inputs.self.nixosModules.desktop
     inputs.self.nixosModules.hardware-powermanagement
+    inputs.self.nixosModules.services-comin
     inputs.self.nixosModules.services-ssh
     inputs.self.nixosModules.services-virtualisation
     inputs.self.nixosModules.system-boot
