@@ -26,6 +26,11 @@
     };
     catppuccin.url = "github:catppuccin/nix";
 
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   # Load the blueprint
