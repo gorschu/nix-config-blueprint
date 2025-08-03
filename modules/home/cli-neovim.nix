@@ -30,6 +30,7 @@ in
           enable = true;
           extensions = {
             project.enable = true;
+            undo.enable = true;
           };
         };
         web-devicons.enable = true;
