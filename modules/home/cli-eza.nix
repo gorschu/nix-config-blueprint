@@ -27,7 +27,7 @@ in
     };
     # this is kind-of-hacky, but for now it works until a vivid module lands in hm
     home.sessionVariables = {
-      LS_COLORS = "$(${pkgs.vivid}/bin/vivid generate catppuccin-macchiato)";
+      LS_COLORS = "$(${pkgs.vivid}/bin/vivid generate catppuccin-${config.catppuccin.flavor})";
     };
   };
 }
