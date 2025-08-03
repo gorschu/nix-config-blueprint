@@ -24,7 +24,16 @@ in
           flavour = "${config.catppuccin.flavor}";
         };
       };
-      plugins.lualine.enable = true;
+      plugins = {
+        lualine.enable = true;
+        telescope = {
+          enable = true;
+          extensions = {
+            project.enable = true;
+          };
+        };
+        web-devicons.enable = true;
+      };
     };
   };
 }
