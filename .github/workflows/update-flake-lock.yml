@@ -22,6 +22,6 @@ jobs:
             dependencies
             automated
           token: ${{secrets.GITHUB_TOKEN}}
-      - run: "gh pr merge --auto --merge ${{ steps.update-flake-lock.outputs.pull-request-number }}"
+      - run: "gh pr merge --auto --rebase ${{ steps.update-flake-lock.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
