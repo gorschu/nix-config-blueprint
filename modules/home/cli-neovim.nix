@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   ...
@@ -15,6 +16,7 @@ in
     };
   };
 
+  imports = [ inputs.nixvim.homeModules.nixvim ];
   config = lib.mkIf cfg.enable {
     programs.nixvim = {
       enable = true;

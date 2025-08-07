@@ -4,7 +4,6 @@
 }:
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
     inputs.self.homeModules.cli
     inputs.self.homeModules.desktop
