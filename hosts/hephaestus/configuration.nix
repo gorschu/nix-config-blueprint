@@ -10,6 +10,7 @@
     inputs.self.nixosModules.host-shared # defines most configuration shared between hosts
     inputs.self.nixosModules.system-filesystem-zfs
     inputs.self.nixosModules.system-networking
+    inputs.self.nixosModules.hardware-laptop
 
     inputs.disko.nixosModules.disko
     ./disko.nix
@@ -68,6 +69,7 @@
     enable = true;
     gnome.enable = true;
   };
+  gorschu.hardware.laptop.enable = true;
   gorschu.system.filesystem.zfs.enable = true;
   gorschu.services.cups.enable = true;
   gorschu.services.ssh.enable = true;
