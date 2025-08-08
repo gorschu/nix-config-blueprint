@@ -36,7 +36,12 @@ in
     };
     gorschu.services.pipewire.enable = true;
     gorschu.hardware.bluetooth.enable = true;
-    services.power-profiles-daemon.enable = true;
+    # explictitely set to false here if we enabled auto-cpufreq
+    # KDE and Gnome want to have it enabled by default if not set
+    services.power-profiles-daemon.enable = lib.mkMerge [
+      (lib.mkIf (!config.programs.auto-cpufreq.enable) true)
+      (lib.mkIf config.programs.auto-cpufreq.enable false)
+    ];
 
     # see https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.portal.enable
     environment.pathsToLink = [
