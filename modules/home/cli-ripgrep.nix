@@ -22,6 +22,5 @@ in
     programs.ripgrep-all = {
       enable = true;
     };
-    catppuccin.bat.enable = true;
   };
 }
